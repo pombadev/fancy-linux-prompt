@@ -2,6 +2,9 @@
 
 A fancy linux prompt is a ~100% inspired by~ fork of [bash-powerline-ng](https://github.com/z4ziggy/bash-powerline-ng), with Tux as the prompt symbol.
 
+
+![fancy-prompt](https://raw.githubusercontent.com/pombam/fancy-linux-prompt/master/Screenshot.png)
+
 ## Installation
 
 Download the Bash script
