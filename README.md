@@ -8,7 +8,7 @@ A fancy linux prompt is a ~100% inspired~ fork of [bash-powerline-ng](https://gi
 
 Download the Bash script
 
-    wget -O ~/.fancy-prompt.sh https://raw.githubusercontent.com/pombam/fancy-linux-prompt/master/fancy-prompt.sh
+    wget -O ~/.fancy-prompt.sh https://raw.githubusercontent.com/pjmp/fancy-linux-prompt/master/fancy-prompt.sh
 
 And source it in your `.bashrc`
 
