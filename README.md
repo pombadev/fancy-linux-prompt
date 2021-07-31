@@ -14,8 +14,7 @@ And source it in your `.bashrc`
 
     source ~/.fancy-prompt.sh
 
-If the triangles aren't displayed correctly, try `sudo apt install fonts-powerline`.
-
 # Note:
 * This assumes you have git installed.
+* If elements are not displayed properly, perhaps installing [powerline fonts](https://powerline.readthedocs.io/en/latest/installation.html) will help.
 * There's no plan to add support for other version control systems.
