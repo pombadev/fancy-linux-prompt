@@ -113,6 +113,7 @@ __powerline() {
 
     PROMPT_COMMAND=ps1
 }
-
+# Skip if not interactive shell
+[[ $- == *i* ]] || return
 __powerline
 unset __powerline
