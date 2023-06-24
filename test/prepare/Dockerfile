@@ -19,5 +19,5 @@ USER lf-user
 RUN git config --global user.email "lf-user@local"
 RUN git config --global user.name "Less Fancy Linux Prompt Tester"
 RUN ./build_test_repos.sh
-RUN ./gather_git_statuses.sh
+CMD ./gather_git_statuses.sh
 

@@ -1,4 +1,7 @@
 #!/bin/env bash
+#
+# This script to be run outside the git repo (e.g. the docker container, via Make)
+#
 set -u
 set -e
 set -x
@@ -80,3 +83,13 @@ mkdir ~/t-norepo
 )
 
 
+(
+    clone-and-enter t-switch-branch
+    git checkout -b feature-branch
+)
+
+
+(
+    clone-and-enter t-headless
+    git reset HEAD^
+)
