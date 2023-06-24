@@ -91,5 +91,5 @@ mkdir ~/t-norepo
 
 (
     clone-and-enter t-headless
-    git reset HEAD^
+    git checkout HEAD^
 )

@@ -1,5 +1,2 @@
-# branch.oid 25490f78be6c1cb96a7f16e3e417742d1860d405
-# branch.head master
-# branch.upstream origin/master
-# branch.ab +0 -1
-1 .M N... 100644 100644 100644 d95f3ad14dee633a758d2e331151e950dd13e4ed d95f3ad14dee633a758d2e331151e950dd13e4ed file
+# branch.oid 2ec3138294bfe1d39fd81c270c019081ed205bc3
+# branch.head (detached)
