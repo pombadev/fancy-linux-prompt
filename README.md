@@ -25,6 +25,7 @@ I have repositories that can test this functionality, but I can't figure out how
 ## TO-DO
 
 * tests for the git branchery
+    - see `test/README.md`
 * Render the folder and branch into PS1
 * Color the path according to whether the folder is writable
 * Color the branch according to whether it is dirty
