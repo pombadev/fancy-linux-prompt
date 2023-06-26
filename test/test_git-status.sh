@@ -33,29 +33,41 @@ get_flags_for_config headless
 test "$git_status_branch" = "(detached)" && test_pass "detached branch Ok"
 test_end
 
-# Dirty Worktree
-test_start "not added"
+# Dirty Worktree ##################################################
+test_start "clean repo"
 get_flags_for_config clean
-$git_status_added_disk || test_pass "clean repo does not show added file"
-$git_status_modified_disk || test_pass "clean repo does not show modified file"
+$git_status_added_disk && test_fail "detected added file"
+$git_status_modified_disk && test_fail "detected modified file"
+$git_status_deleted_disk && test_fail "detected deleted file"
+test_pass
 test_end
 
-test_start "added disk"
-get_flags_for_config added
-$git_status_added_disk && test_pass "detect added file on disk"
-$git_status_modified_disk || test_pass "clean repo does not show modified file"
+test_start "untracked on disk"
+get_flags_for_config untracked
+$git_status_added_disk && test_pass "detected added file"
+$git_status_modified_disk && test_fail "detected modified file"
+$git_status_deleted_disk && test_fail "detected deleted file"
 test_end
 
-test_start "added multiple on disk"
+test_start "multiple untracked on disk"
 get_flags_for_config added2
-$git_status_added_disk && test_pass "detect added files on disk"
-$git_status_modified_disk || test_pass "clean repo does not show modified file"
+$git_status_added_disk && test_pass "detected added file"
+$git_status_modified_disk && test_fail "detected modified file"
+$git_status_deleted_disk && test_fail "detected deleted file"
 test_end
 
 test_start "modified on disk"
 get_flags_for_config modified-disk
-$git_status_added_disk || test_pass "clean repo does not show added file"
-$git_status_modified_disk && test_pass "detect modified files on disk"
+$git_status_added_disk && test_fail "detected added file"
+$git_status_modified_disk && test_pass "detected modified file"
+$git_status_deleted_disk && test_fail "detected deleted file"
+test_end
+
+test_start "deleted on disk"
+get_flags_for_config deleted-disk
+$git_status_added_disk && test_fail "detected added file"
+$git_status_modified_disk && test_fail "detected modified file"
+$git_status_deleted_disk && test_fail "detected deleted file"
 test_end
 
 

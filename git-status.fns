@@ -16,6 +16,7 @@ function git_status_branch {
     readarray lines
     git_status_added_disk=false
     git_status_modified_disk=false
+    git_status_deleted_disk=false
     for line in "${lines[@]}"
     do
         if grep -q "^# branch.head" <<< $line 
