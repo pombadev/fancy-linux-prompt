@@ -62,6 +62,14 @@ mkdir ~/t-norepo
 )
 
 (
+    clone-and-enter t-added2
+    touch file2
+    git add file2
+    touch file3
+    git add file3
+)
+
+(
     clone-and-enter t-modified-disk
     echo 'modified' >> file
 )

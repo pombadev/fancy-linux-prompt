@@ -3,7 +3,7 @@ FROM ubuntu:latest
 RUN useradd --gid users --create-home --password test lf-user
 
 RUN apt update
-RUN apt upgrade -y
+#RUN apt upgrade -y
 RUN apt install -y git
 RUN apt install -y sudo
 
