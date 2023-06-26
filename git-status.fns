@@ -27,9 +27,13 @@ function git_status_branch {
         then
             git_status_added_disk=true
         fi
-        if grep -q '^1 .M' <<< $line
+        if grep -q '^. .M' <<< $line
         then
             git_status_modified_disk=true
+        fi
+        if grep -q '^1 .D' <<< $line
+        then
+            git_status_deleted_disk=true
         fi
 
     done 
