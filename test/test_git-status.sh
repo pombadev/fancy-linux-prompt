@@ -37,16 +37,25 @@ test_end
 test_start "not added"
 get_flags_for_config clean
 $git_status_added_disk || test_pass "clean repo does not show added file"
+$git_status_modified_disk || test_pass "clean repo does not show modified file"
 test_end
 
 test_start "added disk"
 get_flags_for_config added
 $git_status_added_disk && test_pass "detect added file on disk"
+$git_status_modified_disk || test_pass "clean repo does not show modified file"
 test_end
 
 test_start "added multiple on disk"
 get_flags_for_config added2
 $git_status_added_disk && test_pass "detect added files on disk"
+$git_status_modified_disk || test_pass "clean repo does not show modified file"
+test_end
+
+test_start "modified on disk"
+get_flags_for_config modified-disk
+$git_status_added_disk || test_pass "clean repo does not show added file"
+$git_status_modified_disk && test_pass "detect modified files on disk"
 test_end
 
 
