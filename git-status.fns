@@ -1,0 +1,30 @@
+# Bash funcxtion to get git status into environment variables
+#
+# Be careful not to create the variables in a sub-shell, so 
+#
+#   $ git status --porcelain | git_stauts_branch # WRONG
+#   $ git_status_branch < <(git status --porcelain) # RIGHT
+#
+# After call, the following variables are set:
+#
+#  git_status_branch:   The branch name, or "(detached)"
+#
+#
+
+
+function git_status_branch {
+    readarray lines
+    git_status_added_disk=false
+    for line in "${lines[@]}"
+    do
+        if grep -q "^# branch.head" <<< $line 
+        then
+            git_status_branch=$(sed 's/.*\.head //'<<<$line)
+        fi
+        if grep -q '^1 A' <<< $line
+        then
+            git_status_added_disk=true
+        fi
+
+    done 
+}
