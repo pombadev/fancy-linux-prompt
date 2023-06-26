@@ -23,11 +23,11 @@ function git_status_branch {
         then
             git_status_branch=$(sed 's/.*\.head //'<<<$line)
         fi
-        if grep -q '^1 A' <<< $line
+        if grep -q '^\? ' <<< $line
         then
             git_status_added_disk=true
         fi
-        if grep -q '^1 M' <<< $line
+        if grep -q '^1 .M' <<< $line
         then
             git_status_modified_disk=true
         fi
