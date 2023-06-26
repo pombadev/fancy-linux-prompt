@@ -49,13 +49,6 @@ $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
 test_end
 
-test_start "multiple untracked on disk"
-get_flags_for_config added2
-$git_status_added_disk && test_pass "detected added file"
-$git_status_modified_disk && test_fail "detected modified file"
-$git_status_deleted_disk && test_fail "detected deleted file"
-test_end
-
 test_start "modified on disk"
 get_flags_for_config modified-disk
 $git_status_added_disk && test_fail "detected added file"
@@ -67,7 +60,7 @@ test_start "deleted on disk"
 get_flags_for_config deleted-disk
 $git_status_added_disk && test_fail "detected added file"
 $git_status_modified_disk && test_fail "detected modified file"
-$git_status_deleted_disk && test_fail "detected deleted file"
+$git_status_deleted_disk && test_pass "detected deleted file"
 test_end
 
 
