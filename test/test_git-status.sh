@@ -41,6 +41,7 @@ $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
 $git_status_added_index && test_fail "detected added in index"
 $git_status_modified_index && test_fail "detected modified in index"
+$git_status_deleted_index && test_fail "detected deleted in index"
 test_pass
 test_end
 
@@ -51,6 +52,7 @@ $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
 $git_status_added_index && test_fail "detected added in index"
 $git_status_modified_index && test_fail "detected modified in index"
+$git_status_deleted_index && test_fail "detected deleted in index"
 test_end
 
 test_start "modified on disk"
@@ -60,6 +62,7 @@ $git_status_modified_disk && test_pass "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
 $git_status_added_index && test_fail "detected added in index"
 $git_status_modified_index && test_fail "detected modified in index"
+$git_status_deleted_index && test_fail "detected deleted in index"
 test_end
 
 test_start "deleted on disk"
@@ -69,6 +72,7 @@ $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_pass "detected deleted file"
 $git_status_added_index && test_fail "detected added in index"
 $git_status_modified_index && test_fail "detected modified in index"
+$git_status_deleted_index && test_fail "detected deleted in index"
 test_end
 
 # Dirty Index
@@ -79,6 +83,7 @@ $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
 $git_status_added_index && test_pass "detected added in index"
 $git_status_modified_index && test_fail "detected modified in index"
+$git_status_deleted_index && test_fail "detected deleted in index"
 test_end
 
 test_start "modified in index"
@@ -88,7 +93,31 @@ $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
 $git_status_added_index && test_pass "detected added in index"
 $git_status_modified_index && test_pass "detected modified in index"
+$git_status_deleted_index && test_fail "detected deleted in index"
 test_end
 
+test_start "deleted in index"
+get_flags_for_config deleted-index
+$git_status_added_disk && test_fail "detected added file"
+$git_status_modified_disk && test_fail "detected modified file"
+$git_status_deleted_disk && test_fail "detected deleted file"
+$git_status_added_index && test_fail "detected added in index"
+$git_status_modified_index && test_fail "detected modified in index"
+$git_status_deleted_index && test_pass "detected deleted in index"
+test_end
+
+test_start "ahead"
+get_flags_for_config ahead
+[[ $git_status_ahead == "1" ]] || test_fail "ahead should be 1"
+[[ $git_status_behind == "0" ]] || test_fail "behind should have been zero"
+test_pass 
+test_end
+
+test_start "behind"
+get_flags_for_config behind
+[[ $git_status_ahead == "0" ]] || test_fail "ahead should be 0; got $git_status_ahead"
+[[ $git_status_behind == "1" ]] || test_fail "behind should be 1; got $git_status_behind"
+test_pass 
+test_end
 
 test_summary 

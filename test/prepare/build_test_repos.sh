@@ -44,6 +44,11 @@ mkdir ~/t-norepo
 )
 
 (
+    cd t-behind
+    git fetch
+)
+
+(
     clone-and-enter t-ahead
     echo 'yet more content' >> file
     git add file

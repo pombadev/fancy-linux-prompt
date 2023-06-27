@@ -19,11 +19,18 @@ function git_status_branch {
     git_status_deleted_disk=false
     git_status_added_index=false
     git_status_modified_index=false
+    git_status_deleted_index=false
+    get_status_ahead=0
+    git_status_behind=0
     for line in "${lines[@]}"
     do
         if grep -q "^# branch.head" <<< $line 
         then
-            git_status_branch=$(sed 's/.*\.head //'<<<$line)
+            git_status_branch=$(sed 's/.*\.head //') <<< $line
+        fi
+        if grep -q "^# branch.ab" <<< $line
+        then    
+            read git_status_ahead git_status_behind < <(sed 's/# branch.ab +\(.*\) -\(.*\)/\1 \2/' <<< $line)
         fi
         if grep -q '^\? ' <<< $line
         then
@@ -44,6 +51,10 @@ function git_status_branch {
         if grep -q '^. M' <<< $line
         then
             git_status_modified_index=true
+        fi
+        if grep -q '^. D' <<< $line
+        then
+            git_status_deleted_index=true
         fi
 
 git_status_modified_index=false
