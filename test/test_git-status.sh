@@ -39,6 +39,7 @@ get_flags_for_config clean
 $git_status_added_disk && test_fail "detected added file"
 $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
+$git_status_added_index && test_fail "detected added in index"
 test_pass
 test_end
 
@@ -47,6 +48,7 @@ get_flags_for_config untracked
 $git_status_added_disk && test_pass "detected added file"
 $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
+$git_status_added_index && test_fail "detected added in index"
 test_end
 
 test_start "modified on disk"
@@ -54,6 +56,7 @@ get_flags_for_config modified-disk
 $git_status_added_disk && test_fail "detected added file"
 $git_status_modified_disk && test_pass "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
+$git_status_added_index && test_fail "detected added in index"
 test_end
 
 test_start "deleted on disk"
@@ -61,6 +64,16 @@ get_flags_for_config deleted-disk
 $git_status_added_disk && test_fail "detected added file"
 $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_pass "detected deleted file"
+$git_status_added_index && test_fail "detected added in index"
+test_end
+
+# Dirty Index
+test_start "added file"
+get_flags_for_config modified-disk
+$git_status_added_disk && test_fail "detected added file"
+$git_status_modified_disk && test_pass "detected modified file"
+$git_status_deleted_disk && test_fail "detected deleted file"
+$git_status_added_index && test_fail "detected added in index"
 test_end
 
 
