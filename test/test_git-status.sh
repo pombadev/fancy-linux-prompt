@@ -15,7 +15,7 @@ function get_flags_for_config {
     git_status_branch < "$file"
 }
 
-source bash_test_framework.sh
+source bash_test_framework.fns
 
 # Branch name tests
 test_start "clean repo"
