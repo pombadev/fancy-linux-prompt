@@ -36,6 +36,10 @@ function git_status_branch {
         then
             git_status_deleted_disk=true
         fi
+        if grep -q '^. A' <<< $line
+        then
+            git_status_added_index=true
+        fi
 
     done 
 }
