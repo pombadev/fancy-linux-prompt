@@ -18,6 +18,7 @@ function git_status_branch {
     git_status_modified_disk=false
     git_status_deleted_disk=false
     git_status_added_index=false
+    git_status_modified_index=false
     for line in "${lines[@]}"
     do
         if grep -q "^# branch.head" <<< $line 
@@ -40,6 +41,11 @@ function git_status_branch {
         then
             git_status_added_index=true
         fi
+        if grep -q '^. M' <<< $line
+        then
+            git_status_modified_index=true
+        fi
 
+git_status_modified_index=false
     done 
 }
