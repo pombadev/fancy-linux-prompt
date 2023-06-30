@@ -11,7 +11,9 @@ function test_start {
         test_end
     fi
     btf_name="$1"
+    tput setaf 6
     echo -e "TEST: $btf_name"
+    tput setaf 7
     btf_pass=false
     btf_fail=false
 }
@@ -19,16 +21,20 @@ function test_start {
 function test_end {
     echo -n "end : $btf_name: "
     if $btf_fail
-    then 
+    then
+        tput setaf 1 
         echo "FAIL"
+        tput setaf 7
         btf_failures+=("$btf_name")
     else
         if $btf_pass
         then
+            tput setaf 2
             echo "Pass"
+            tput setaf 7
         else
             test_fail "Nothing was tested"
-        btf_failures+=("$btf_name")
+            btf_failures+=("$btf_name")
         fi
     fi
     btf_name=""
@@ -41,13 +47,19 @@ function test_summary {
     then
         if $btf_there_were_passes
         then
+            tput setaf 2
             echo "PASS: All OK"
+            tput setaf 7
         else
+            tput setaf 1
             echo "FAIL: Nothing found"
+            tput setaf 7
             exit 1
         fi
     else    
+        tput setaf 1
         echo "FAIL: There were failures:"
+        tput setaf 7
         for name in "${btf_failures[@]}"
         do
             echo "    $name"
@@ -61,12 +73,16 @@ function test_info {
 }
 
 function test_pass {
+    tput setaf 2
     echo "Pass: $btf_name: $@"
+    tput setaf 7
     btf_pass=true
     btf_there_were_passes=true
 
 }
 function test_fail {
+    tput setaf 1
     echo "FAIL: $btf_name: $@"
+    tput setaf 7
     btf_fail=true
 }
