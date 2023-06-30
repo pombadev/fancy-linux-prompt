@@ -39,7 +39,7 @@ function test_end {
 
 function test_summary {
     echo -n "Summary: "
-    if $btf_there_were_failures 
+    if [[ ${#btf_failures} -gt 0 ]] 
     then
         echo "FAIL: There were failures:"
         for name in "${btf_failures[@]}"
