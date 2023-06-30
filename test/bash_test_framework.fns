@@ -1,6 +1,7 @@
 # source this script to make tests with bash
 
 declare -a btf_failures
+btf_there_were_passes=false
 
 function test_start {
     if [[ -n "$btf_name" ]]
@@ -12,8 +13,6 @@ function test_start {
     echo -e "TEST: $btf_name"
     btf_pass=false
     btf_fail=false
-    btf_there_were_failures=false
-    btf_there_were_passes=false
 }
 
 function test_end {
@@ -21,7 +20,6 @@ function test_end {
     if $btf_fail
     then 
         echo "FAIL"
-        btf_there_were_failures=true
         btf_failures+=("$btf_name")
     else
         if $btf_pass
@@ -29,7 +27,6 @@ function test_end {
             echo "Pass"
         else
             test_fail "Nothing was tested"
-            btf_there_were_failures=true
         btf_failures+=("$btf_name")
         fi
     fi
@@ -71,5 +68,4 @@ function test_pass {
 function test_fail {
     echo "FAIL: $btf_name: $@"
     btf_fail=true
-    btf_there_were_failures=true
 }
