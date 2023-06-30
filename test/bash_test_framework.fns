@@ -1,6 +1,7 @@
 # source this script to make tests with bash
 
 declare -a btf_failures
+btf_failures=()
 btf_there_were_passes=false
 
 function test_start {
@@ -36,15 +37,8 @@ function test_end {
 
 function test_summary {
     echo -n "Summary: "
-    if [[ ${#btf_failures} -gt 0 ]] 
+    if [[ -z ${btf_failures-} ]] # Bash thinks empty array is undefined. Since we may (should) have set -u then we use this hack
     then
-        echo "FAIL: There were failures:"
-        for name in "${btf_failures[@]}"
-        do
-            echo "    $name"
-        done
-        exit 1
-    else    
         if $btf_there_were_passes
         then
             echo "PASS: All OK"
@@ -52,6 +46,13 @@ function test_summary {
             echo "FAIL: Nothing found"
             exit 1
         fi
+    else    
+        echo "FAIL: There were failures:"
+        for name in "${btf_failures[@]}"
+        do
+            echo "    $name"
+        done
+        exit 1
     fi
 }
 
