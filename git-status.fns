@@ -14,6 +14,7 @@
 
 function git_status_branch {
     readarray lines
+    git_status_branch="NULL"
     git_status_added_disk=false
     git_status_modified_disk=false
     git_status_deleted_disk=false
@@ -26,7 +27,7 @@ function git_status_branch {
     do
         if grep -q "^# branch.head" <<< $line 
         then
-            git_status_branch=$(sed 's/.*\.head //') <<< $line
+            git_status_branch=$(sed 's/# branch\.head //' <<< $line )
         fi
         if grep -q "^# branch.ab" <<< $line
         then    
