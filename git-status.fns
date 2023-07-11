@@ -59,6 +59,5 @@ function git_status_branch {
             git_status_deleted_index=true
         fi
 
-git_status_modified_index=false
     done 
 }
