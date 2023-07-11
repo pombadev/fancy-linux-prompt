@@ -28,6 +28,7 @@ function git_status_branch {
         if grep -q "^# branch.head" <<< $line 
         then
             git_status_branch=$(sed 's/# branch\.head //' <<< $line )
+            test "$git_status_branch" = "(detached)" && git_status_branch='('$(git describe --tags --always)')'
         fi
         if grep -q "^# branch.ab" <<< $line
         then    

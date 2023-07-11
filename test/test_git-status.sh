@@ -30,7 +30,7 @@ test_end
 
 test_start "detached"
 get_flags_for_config headless
-test "$git_status_branch" = "(detached)" && test_pass "detached branch Ok"
+test "$git_status_branch" = "(0e09ee1)" && test_pass "detached branch Ok" || test_fail "got $git_status_branch"
 test_end
 
 # Dirty Worktree ##################################################
