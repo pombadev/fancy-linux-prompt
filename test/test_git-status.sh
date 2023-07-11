@@ -87,7 +87,7 @@ $git_status_deleted_index && test_fail "detected deleted in index"
 test_end
 
 test_start "modified in index"
-get_flags_for_config added
+get_flags_for_config modified-index
 $git_status_added_disk && test_fail "detected added file"
 $git_status_modified_disk && test_fail "detected modified file"
 $git_status_deleted_disk && test_fail "detected deleted file"
