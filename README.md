@@ -1,7 +1,7 @@
 # Less fancy linux prompt
 
 A linux prompt inspired by fancy-linux-prompt, but with the emphasis on 
-readbility by conformance with the solarized color scheme.
+readbility by conformance with the solarized color scheme, and not forcing you to use the font with the chevrons in.
 
 ## Design
 
