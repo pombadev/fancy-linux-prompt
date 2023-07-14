@@ -15,23 +15,15 @@ There is only one such scheme, solarized.sh.
 
 The file `prefs` maps colors in the scheme to semantic names, `CS_GIT_CLEAN` etc.  This file should be the only place you have to make changes to tune what you see.
 
-## WIP
+## DONE 
 
-Currently working on git status, gatting the status to a set of variables `CH_GIT_*`.
-
-I have repositories that can test this functionality, but I can't figure out how to smuggle them into git.
-
+* Render the folder and branch into PS1
+* Color the branch according to whether it is dirty
 
 ## TO-DO
 
-* Transform the color variables into PS1 compatible color variables
-* tests for the git branchery
-    - see `test/README.md`
-* Render the folder and branch into PS1
 * Color the path according to whether the folder is writable
-* Color the branch according to whether it is dirty
 * Indicators for ahead and behind
-
 
 ## TO-THINK-ABOUT
 

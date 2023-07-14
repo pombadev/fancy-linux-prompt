@@ -41,7 +41,7 @@ __set_prompt_command() {
         PS1+="$RESET"
         PS1+="$(__git_info)"
         PS1+="$RESET"
-        PS1+=" ${RESET}\\$ "
+        PS1+=" ${COL_FG_BASE0}\\$ "
     }
 
     PROMPT_COMMAND=set_prompt_string
