@@ -1,9 +1,9 @@
-# Bash funcxtion to get git status into environment variables
+# Bash function to get git status into environment variables
 #
 # Be careful not to create the variables in a sub-shell, so 
 #
-#   $ git status --porcelain | git_stauts_branch # WRONG
-#   $ git_status_branch < <(git status --porcelain) # RIGHT
+#   $ git status --porcelain=2 --branch | git_status_branch # WRONG
+#   $ git_status_branch < <(git status --porcelain=2 --branch) # RIGHT
 #
 # After call, the following variables are set:
 #

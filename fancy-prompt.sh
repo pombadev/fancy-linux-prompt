@@ -3,35 +3,26 @@
 __set_prompt_command() {
 
     source git-status.fns
+    source prefs
 
     __git_info() {
         # no .git directory
-    	[ -d .git ] || return
-
-        local aheadN
-        local behindN
-        local branch
-        local marks
-        local stats
-
-        # get current branch name or short SHA1 hash for detached head
-        branch="$(git symbolic-ref --short HEAD 2>/dev/null || git describe --tags --always 2>/dev/null)"
-        [ -n "$branch" ] || return  # git branch not found
-
-        # how many commits local branch is ahead/behind of remote?
-        stats="$(git status --porcelain --branch | grep '^##' | grep -o '\[.\+\]$')"
-        aheadN="$(echo "$stats" | grep -o 'ahead \d\+' | grep -o '\d\+')"
-        behindN="$(echo "$stats" | grep -o 'behind \d\+' | grep -o '\d\+')"
-        [ -n "$aheadN" ] && marks+=" $GIT_NEED_PUSH_SYMBOL$aheadN"
-        [ -n "$behindN" ] && marks+=" $GIT_NEED_PULL_SYMBOL$behindN"
-
-        # print the git branch segment without a trailing newline
-        # branch is modified?
-        if [ -n "$(git status --porcelain)" ]; then
-            printf "%s" "${BG_COLOR8}$RESET$BG_COLOR8 $branch$marks $FG_COLOR9"
+        git_status_branch < <(git status --porcelain=2 --branch)
+        if $git_status_added_index || $git_status_modified_index || $git_status_deleted_index 
+        then
+            echo -n $CS_GIT_IDX
         else
-            printf "%s" "${BG_BLUE}$RESET$BG_BLUE $branch$marks $RESET$FG_BLUE"
+            if $git_status_added_disk || $git_status_modified_disk || $git_status_deleted_disk
+            then
+                echo -n $CS_GIT_MOD
+            else
+                echo -n $CS_GIT_OK
+            fi
         fi
+        echo -n "("
+        echo -n "${git_status_branch}"
+        echo ")"
+
     }
 
     set_prompt_string() {
@@ -47,10 +38,10 @@ __set_prompt_command() {
 
         PS1="$CS_DIR_RW"
         PS1+="\\w"
-        PS1+="$RESET${CS_GIT_OK}"
+        PS1+="$RESET"
         PS1+="$(__git_info)"
         PS1+="$RESET"
-        PS1+="$BG_EXIT$CS_DIR_RW ${PS_SYMBOL} ${RESET}${FG_EXIT}${RESET} "
+        PS1+=" ${RESET}\\$ "
     }
 
     PROMPT_COMMAND=set_prompt_string
