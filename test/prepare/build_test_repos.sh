@@ -101,8 +101,12 @@ mkdir ~/t-norepo
     git checkout -b feature-branch
 )
 
-
 (
     clone-and-enter t-headless
     git checkout HEAD^
+)
+
+(
+    clone-and-enter t-subdirs
+    mkdir -p subdir/subdir
 )
