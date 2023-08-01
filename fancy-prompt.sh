@@ -64,7 +64,7 @@ __powerline() {
 
     __git_info() {
         # no .git directory
-    	[ -d .git ] || return
+    	[ -e .git ] || return
 
         local aheadN
         local behindN
