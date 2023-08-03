@@ -1,6 +1,10 @@
+# Note: this color-scheme only really works if your terminal is 
+# on the solarized colorscheme.  Tested in windows terminal.
+
 source color-schemes/solarized.sh
 
-CS_PLAIN="$COL_FG_BASE00"
+
+CS_PLAIN="$COL_BG_BASE02$COL_FG_BASE1"
 
 CS_DIR_RW="$COL_FG_BLUE"
 CS_DIR_RO="$COL_FG_RED"
