@@ -20,14 +20,14 @@ __set_prompt_command() {
             fi
         fi
         echo -n "("
-        if [[ "$git_status_ahead" -ne "0" ]]
-        then 
-            echo -n "${git_status_ahead}<"
-        fi
-        echo -n "${git_status_branch}"
         if [[ "$git_status_behind" -ne "0" ]]
         then 
-            echo -n ">${git_status_behind}"
+            echo -n "<${git_status_behind}"
+        fi
+        echo -n "${git_status_branch}"
+        if [[ "$git_status_ahead" -ne "0" ]]
+        then 
+            echo -n ">${git_status_ahead}"
         fi
         echo -n ")"
 
