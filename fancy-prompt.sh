@@ -100,7 +100,7 @@ __set_prompt_command() {
             local FG_EXIT="$FG_RED"
         fi
 
-        PS1=$(__recurse)$' \n${COL_FG_BASE0}$ '
+        PS1=$(__recurse)$'${COL_FG_BASE0}\n$ '
     }
 
     PROMPT_COMMAND=set_prompt_string
