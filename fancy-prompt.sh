@@ -70,10 +70,6 @@ __set_prompt_command() {
 
         # Now draw myself to stdout
         echo -n ${CS_PLAIN}${sep}
-        if [ -e "$dir/.git" ]
-        then  
-            __git_info
-        fi
         
         if [ -w "$dir" ]
         then
@@ -82,6 +78,10 @@ __set_prompt_command() {
             echo -n "$CS_DIR_RO"
         fi
         echo -n $b
+        if [ -e "$dir/.git" ]
+        then  
+            __git_info
+        fi
         # At the top level, insert a newline
         if [[ $# -eq 0 ]]
         then
