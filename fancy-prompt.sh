@@ -10,26 +10,27 @@ __set_prompt_command() {
         git_status_branch < <(git status --porcelain=2 --branch)
         if $git_status_added_index || $git_status_modified_index || $git_status_deleted_index 
         then
-            echo -n $CS_GIT_IDX
+            git_status_color=$CS_GIT_IDX
         else
             if $git_status_added_disk || $git_status_modified_disk || $git_status_deleted_disk
             then
-                echo -n $CS_GIT_MOD
+                git_status_color=$CS_GIT_MOD
             else
-                echo -n $CS_GIT_OK
+                git_status_color=$CS_GIT_OK
             fi
         fi
-        echo -n "("
+        echo -n "${git_status_color}("
         if [[ "$git_status_behind" -ne "0" ]]
         then 
-            echo -n "<${git_status_behind}"
+            echo -n "${CS_GIT_BEHIND}<${git_status_behind}"
         fi
-        echo -n "${git_status_branch}"
-        if [[ "$git_status_ahead" -ne "0" ]]
+        echo -n "${git_status_color}${git_status_branch}"
+        if [[ "$git_status_ahead" -ne "0" 
+        ]]
         then 
-            echo -n ">${git_status_ahead}"
+            echo -n "${CS_GIT_AHEAD}>${git_status_ahead}"
         fi
-        echo -n ")"
+        echo -n "${git_status_color})"
 
     }
 
