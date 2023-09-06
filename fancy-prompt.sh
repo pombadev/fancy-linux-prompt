@@ -93,15 +93,19 @@ __set_prompt_command() {
     set_prompt_string() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly.
-        if [ "$?" -eq 0 ]; then
-            local BG_EXIT="$BG_GREEN"
-            local FG_EXIT="$FG_GREEN"
+        return_status=$?
+        if [ "${return_status}" -eq "0" ]; then
+            BG_EXIT="$COL_BG_GREEN"
+            FG_EXIT="$COL_FG_GREEN"
+            status_string=""
         else
-            local BG_EXIT="$BG_RED"
-            local FG_EXIT="$FG_RED"
+            BG_EXIT="$COL_BG_RED"
+            FG_EXIT="$COL_FG_RED"
+            status_string="${FG_EXIT}${BG_EXIT}(->${return_status})"
         fi
 
-        PS1=$(__recurse)$'${COL_FG_BASE0}\n$ '
+
+        PS1=${status_string}$(__recurse)$'${COL_FG_BASE0}\n$ '
     }
 
     PROMPT_COMMAND=set_prompt_string
