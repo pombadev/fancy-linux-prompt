@@ -101,11 +101,11 @@ __set_prompt_command() {
         else
             BG_EXIT="$COL_BG_RED"
             FG_EXIT="$COL_FG_RED"
-            status_string="${FG_EXIT}${BG_EXIT}(->${return_status})"
+            status_string="💣 ${return_status}"
         fi
 
 
-        PS1=${status_string}$(__recurse)$'${COL_FG_BASE0}\n$ '
+        PS1=$(__recurse)$' ${status_string}${COL_FG_BASE0}\n${FG_EXIT}\$${COL_RESET} '
     }
 
     PROMPT_COMMAND=set_prompt_string
