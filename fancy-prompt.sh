@@ -105,7 +105,7 @@ __set_prompt_command() {
         fi
 
 
-        PS1=$(__recurse)$' ${status_string}${COL_FG_BASE0}\n${FG_EXIT}\$${COL_RESET} '
+        PS1=$(__recurse)$' ${status_string}${COL_FG_BASE0}\n\x01${FG_EXIT}\x02\$\x01${COL_RESET}\x02 '
     }
 
     PROMPT_COMMAND=set_prompt_string
