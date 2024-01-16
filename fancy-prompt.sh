@@ -78,8 +78,8 @@ __powerline() {
 
         # how many commits local branch is ahead/behind of remote?
         stats="$(git status --porcelain --branch | grep '^##' | grep -o '\[.\+\]$')"
-        aheadN="$(echo "$stats" | grep -o 'ahead \d\+' | grep -o '\d\+')"
-        behindN="$(echo "$stats" | grep -o 'behind \d\+' | grep -o '\d\+')"
+        aheadN=$(echo "$stats" | grep -oP '\[ahead \K\d+' | tr -d ']')
+        behindN=$(echo "$stats" | grep -oP '\[behind \K\d+' | tr -d ']')
         [ -n "$aheadN" ] && marks+=" $GIT_NEED_PUSH_SYMBOL$aheadN"
         [ -n "$behindN" ] && marks+=" $GIT_NEED_PULL_SYMBOL$behindN"
 
