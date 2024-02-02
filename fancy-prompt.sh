@@ -63,8 +63,10 @@ __powerline() {
     readonly REVERSE="\\[$(tput rev)\\]"
 
     __git_info() {
-        # no .git directory
-    	[ -d .git ] || return
+        # Not a git repository
+        if [ ! -d .git ] && [ ! -n "$(git rev-parse --git-dir 2> /dev/null)" ]; then
+            return
+        fi
 
         local aheadN
         local behindN
