@@ -63,8 +63,10 @@ __powerline() {
     readonly REVERSE="\\[$(tput rev)\\]"
 
     __git_info() {
-        # no .git directory
-    	[ -d .git ] || return
+        # Not a git repository
+        if [ ! -d .git ] && [ ! -n "$(git rev-parse --git-dir 2> /dev/null)" ]; then
+            return
+        fi
 
         local aheadN
         local behindN
@@ -78,8 +80,8 @@ __powerline() {
 
         # how many commits local branch is ahead/behind of remote?
         stats="$(git status --porcelain --branch | grep '^##' | grep -o '\[.\+\]$')"
-        aheadN="$(echo "$stats" | grep -o 'ahead \d\+' | grep -o '\d\+')"
-        behindN="$(echo "$stats" | grep -o 'behind \d\+' | grep -o '\d\+')"
+        aheadN=$(echo "$stats" | grep -oP '\[ahead \K\d+' | tr -d ']')
+        behindN=$(echo "$stats" | grep -oP '\[behind \K\d+' | tr -d ']')
         [ -n "$aheadN" ] && marks+=" $GIT_NEED_PUSH_SYMBOL$aheadN"
         [ -n "$behindN" ] && marks+=" $GIT_NEED_PULL_SYMBOL$behindN"
 
